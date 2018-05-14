@@ -205,6 +205,7 @@ OPTION(PLUS_USE_CAPISTRANO_VIDEO "Provide support for the Capistrano Labs USB ul
 OPTION(PLUS_USE_WINPROBE_VIDEO "Provide support WinProbe ultrasound systems" OFF)
 OPTION(PLUS_USE_INTERSON_VIDEO "Provide support for the Interson USB ultrasound probes" OFF)
 OPTION(PLUS_USE_INTERSONSDKCXX_VIDEO "Provide support for the Interson SDK 1.X with C++ Wrapper USB ultrasound probes" OFF)
+OPTION(PLUS_USE_INTERSONARRAYSDKCXX_VIDEO "Provide support for the Interson SDK 2.X with C++ Wrapper USB ultrasound probes" OFF)
 OPTION(PLUS_USE_TELEMED_VIDEO "Provide support for the Telemed ultrasound probes" OFF)
 OPTION(PLUS_USE_AGILENT "Provide support for the Agilent digitizer device" OFF) 
 IF(PLUS_USE_TELEMED_VIDEO)
@@ -296,9 +297,9 @@ ENDIF()
 #-----------------------------------------------------------------------------
 # Plus revision - Set Plus stable relase revision (master means latest)
 #-----------------------------------------------------------------------------
-SET(PLUSLIB_GIT_REPOSITORY "${GIT_PROTOCOL}://github.com/PlusToolkit/PlusLib.git" CACHE STRING "Set PlusLib desired git url")
+SET(PLUSLIB_GIT_REPOSITORY "${GIT_PROTOCOL}://github.com/sjh26/PlusLib.git" CACHE STRING "Set PlusLib desired git url")
 MARK_AS_ADVANCED(PLUSLIB_GIT_REPOSITORY)
-SET(PLUSLIB_GIT_REVISION "master" CACHE STRING "Set PlusLib desired git hash (master means latest)")
+SET(PLUSLIB_GIT_REVISION "array" CACHE STRING "Set PlusLib desired git hash (master means latest)")
 MARK_AS_ADVANCED(PLUSLIB_GIT_REVISION)
 
 SET(PLUSAPP_GIT_REPOSITORY "${GIT_PROTOCOL}://github.com/PlusToolkit/PlusApp.git" CACHE STRING "Set PlusApp desired git url")
@@ -664,6 +665,12 @@ IF(PLUS_USE_INTERSONSDKCXX_VIDEO AND NOT IntersonSDKCxx_DIR)
   SET(IntersonSDKCxx_DEPENDENCIES)
   LIST(APPEND PlusLib_DEPENDENCIES IntersonSDKCxx)
   INCLUDE(SuperBuild/External_IntersonSDKCxx.cmake)
+ENDIF()
+
+IF(PLUS_USE_INTERSONARRAYSDKCXX_VIDEO AND NOT IntersonArraySDKCxx_DIR)
+  SET(IntersonArraySDKCxx_DEPENDENCIES)
+  LIST(APPEND PlusLib_DEPENDENCIES IntersonArraySDKCxx)
+  INCLUDE(SuperBuild/External_IntersonArraySDKCxx.cmake)
 ENDIF()
 
 IF(PLUS_USE_OvrvisionPro AND NOT OvrvisionPro_DIR)

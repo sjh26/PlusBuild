@@ -20,7 +20,7 @@ ELSE()
   SetGitRepositoryTag(
     IntersonSDKCxx
     "${GIT_PROTOCOL}://github.com/KitwareMedical/IntersonSDKCxx.git"
-    "819d620052be7e9b232e12d8946793c15cfbf5a3"
+    "d4c85f0be20db55124570558a23692f19dcb1c10"
     )
 
   SET (PLUS_IntersonSDKCxx_SRC_DIR "${CMAKE_BINARY_DIR}/Deps/IntersonSDKCxx")
@@ -42,6 +42,7 @@ ELSE()
       -DBUILD_TESTING:BOOL=OFF
       -DCMAKE_CXX_FLAGS:STRING=${ep_common_cxx_flags}
       -DCMAKE_C_FLAGS:STRING=${ep_common_c_flags}
+      -DIntersonSDK_DIR:PATH=${IntersonSDK_DIR}
     #--Build step-----------------
     BUILD_ALWAYS 1    
     #--Install step-----------------
